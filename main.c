@@ -21,15 +21,16 @@ Motor* create_motor(double emf_constant, double torque_constant, double moi, dou
     motor->moi = moi;
     motor->friction = friction;
     motor->last_update = 0;
+    motor->voltage = 0;
     motor->velocity = 0;
     motor->current = 0;
-    motor->resistance = 10;
+    motor->resistance = 0.0328;
     motor->back_emf = 0;
     return motor;
 }
 
 int main(void) {
-    Motor* motor = create_motor(0.25, 0.01, 0.00001, 0.000001);
+    Motor* motor = create_motor(0.0191, 0.0195, 0.01, 0.000062);
 
     while (1)
     {
@@ -39,14 +40,14 @@ int main(void) {
         double accumulated_t = 0;
 
         while (accumulated_t < dt) {
-            update_motor(motor, 5, physics_dt);
+            update_motor(motor, 12, physics_dt);
             accumulated_t += physics_dt;
         }
 
         motor->last_update = time;
 
         printf("Velocity: %.2f | Voltage: %.2f | Current: %.2f\n",
-                        motor->velocity, motor->voltage, motor->current);
+                        motor->velocity / (M_PI / 30.0) , motor->voltage, motor->current);
 
         sleep_ms(10);
     }

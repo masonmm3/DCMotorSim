@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 
 //unstable at high dt often requiring substepping
@@ -73,6 +74,7 @@ int main(void) {
     {
         clock_t time = clock();
         double dt = (double)(time - motor->last_update) / CLOCKS_PER_SEC;
+        printf("dt: %.2f \n", dt * 1000.0);
 
         update_motor(motor, 12, dt);
         update_motor_rk4(motor2, 12, dt);
@@ -85,7 +87,11 @@ int main(void) {
         printf("Velocity2: %.2f | Voltage2: %.2f | Current2: %.2f\n",
                         motor2->velocity / (M_PI / 30.0) , motor2->voltage, motor2->current);
 
-        sleep_ms(10);
+
+        clock_t final = clock();
+        double elapsed = (double)(final - time) / CLOCKS_PER_SEC;
+        elapsed *= 1000.0;
+        sleep_ms(10 - elapsed);
     }
 
     free(motor);

@@ -4,13 +4,12 @@
 #include "stdio.h"
 #include <stdio.h>
 #include <time.h>
-#ifdef _WIN32
-    #include <windows.h>
-    #define sleep_ms(ms) Sleep(ms)
-#else
-    #include <unistd.h>
-    #define sleep_ms(ms) usleep((ms) * 1000)
-#endif
+#define sleep_ms(ms) \
+    do {                                    \
+        clock_t _start = clock();           \
+        while (((double)(clock() - _start)  \
+               / CLOCKS_PER_SEC) * 1000.0 < (ms)); \
+    } while (0)
 
 #define M_PI 3.14159265358979323846
 

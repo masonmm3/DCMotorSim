@@ -15,6 +15,8 @@
 #define M_PI 3.14159265358979323846
 
 typedef struct Motor Motor;
+typedef struct MotorDerivatives MotorDerivatives;
+
 struct Motor {
     double voltage;
     double back_emf;
@@ -27,4 +29,9 @@ struct Motor {
     double moi;
     double friction;
     clock_t last_update;
+};
+
+struct MotorDerivatives{
+    double dI;
+    double dOmega;
 };

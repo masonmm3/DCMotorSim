@@ -9,7 +9,7 @@ Someone experienced with motors that doesn't understand their properties would t
 ---
 DC motors are relatively easy to model. They are made up of a resistive component, (voltage drop), an inductor (current load), and a dependent Voltage source (back emf)
 
-![[Pasted image 20260531143529.png]]
+![](Pasted%20image%2020260531143529.png)
 
 # Mathematical model
 ---
@@ -19,7 +19,7 @@ Solving the equations we can get the following governing differential equation w
 > $$LJ \frac{d^2\omega}{dt^2} + (Lb + RJ) \frac{d\omega}{dt} + (K_t K_e + Rb)\omega = K_t V_{in}$$
 
 which can be used to create a transfer function similar to the following for determining the velocity.
-![[Pasted image 20260531144733.png]]
+![](Pasted%20image%2020260531144733.png)
 
 ### Theoretical Behavior
 ---
